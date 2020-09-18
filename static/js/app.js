@@ -23,15 +23,29 @@ var input_data = (data_source) => {
     });
 });
 }
-
 input_data(tableData);
 
 
 
 //// Button Select Function ////
-// filter_button.on("click", function() {
+filter_button.on("click", function() {
+    d3.event.preventDefault();
 
-// })
+    var input_date = date_criteria.property("value").trim();
+    var date_filter = tableData.filter(tableData => tableData.datetime === input_date);
+
+    output_table.html("");
+
+    if (date_filter.length !== 0){
+        input_data(date_filter);
+    }
+    else if (date_filter.length === 0){
+        input_data(tableData)
+    }
+    else {
+        output_table.append("tr").append("td").text("No results found.");
+    }
+})
 
 
 
