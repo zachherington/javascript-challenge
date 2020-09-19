@@ -3,17 +3,17 @@ var tableData = data;
 
 //// Using D3 to select objects in the HTML code ////
 
-// Primary filter fields
+// HMTL Script references
 var output_table = d3.select("tbody"); 
 var filter_button = d3.select("#filter-btn");
 var date_criteria = d3.select("#datetime");
 
-//// Retrieve all Keys ////
+//// Retrieve all Keys from JSON ////
 var key_list = Object.keys(tableData[0])
     // console.log(key_list);
 
 
-//// Filling HTML Table with All Data ////
+//// Default fill HTML Table with All Data ////
 var input_data = (data_source) => {
     data_source.forEach(sighting => {
         var new_row = output_table.append("tr");
@@ -40,27 +40,9 @@ filter_button.on("click", function() {
         input_data(date_filter);
     }
     else if (date_filter.length === 0){
-        input_data(tableData)
+        input_data(tableData);
     }
     else {
         output_table.append("tr").append("td").text("No results found.");
     }
-})
-
-
-
-
-
-
-
-
-
-
-
-//// Secondary filter fields (would need to all these form fields in the HTML)
-// var date_criteria = d3.select("#datetime");
-// var city_criteria = d3.select("#datetime");
-// var state_criteria = d3.select("#datetime");
-// var country_criteria = d3.select("#datetime");
-// var shape_criteria = d3.select("#datetime");
-// var comment_criteria = d3.select("#datetime");
+});
